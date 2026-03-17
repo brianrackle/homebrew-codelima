@@ -36,6 +36,7 @@ class Codelima < Formula
     ghostty_lib = OS.mac? ? "libghostty-vt.dylib" : "libghostty-vt.so"
     source_ghostty_lib = File.join(root, "lib", ghostty_lib)
     (libexec/"bin").install "#{root}/bin/codelima-real"
+    pkgshare.mkpath
     Zlib::GzipWriter.open(pkgshare/"#{ghostty_lib}.gz") do |gz|
       gz.write File.binread(source_ghostty_lib)
     end
