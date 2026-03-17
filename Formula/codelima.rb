@@ -5,6 +5,8 @@ class Codelima < Formula
   homepage "https://github.com/brianrackle/codelima"
   license "GPL-3.0-only"
 
+  version "0.0.1"
+
   on_macos do
     on_arm do
       url "https://github.com/brianrackle/codelima/releases/download/v0.0.1/codelima_0.0.1_darwin_arm64.tar.gz"
