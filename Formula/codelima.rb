@@ -29,9 +29,8 @@ class Codelima < Formula
   depends_on "lima"
 
   def install
-    root = Dir["codelima_*"]
-    odie "missing packaged release root" if root.empty?
-    root = root.fetch(0)
+    root = Dir["codelima_*/bin/codelima-real"].empty? ? "." : Dir["codelima_*"].fetch(0)
+    odie "missing packaged release root" unless File.exist?(File.join(root, "bin", "codelima-real"))
     ghostty_lib = OS.mac? ? "libghostty-vt.dylib" : "libghostty-vt.so"
     (libexec/"bin").install "#{root}/bin/codelima-real"
     (libexec/"lib").install "#{root}/lib/#{ghostty_lib}"
