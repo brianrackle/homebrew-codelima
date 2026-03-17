@@ -33,10 +33,10 @@ class Codelima < Formula
     odie "missing packaged release root" unless File.exist?(File.join(root, "bin", "codelima-real"))
     ghostty_lib = OS.mac? ? "libghostty-vt.dylib" : "libghostty-vt.so"
     (libexec/"bin").install "#{root}/bin/codelima-real"
-    (libexec/"lib").install "#{root}/lib/#{ghostty_lib}"
+    pkgshare.install "#{root}/lib/#{ghostty_lib}"
     (bin/"codelima").write <<~SH
 #!/bin/bash
-export CODELIMA_GHOSTTY_VT_LIB="#{libexec}/lib/#{ghostty_lib}"
+export CODELIMA_GHOSTTY_VT_LIB="#{pkgshare}/#{ghostty_lib}"
 exec "#{libexec}/bin/codelima-real" "$@"
 SH
     chmod 0755, bin/"codelima"
