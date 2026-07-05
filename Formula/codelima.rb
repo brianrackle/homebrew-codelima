@@ -5,27 +5,27 @@ class Codelima < Formula
   homepage "https://github.com/brianrackle/codelima"
   license "GPL-3.0-only"
 
-  version "0.0.14"
+  version "0.0.15"
 
   on_macos do
     on_arm do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.0.14/codelima_0.0.14_darwin_arm64.tar.gz"
-      sha256 "baaaecacbff6c74ed66febb8fa7991666f5d9138d1d11de62ff086ad8b6f4143"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.0.15/codelima_0.0.15_darwin_arm64.tar.gz"
+      sha256 "659908c6c9c740ffd4ae3d6eefd3caab1715da4e0d36773bf94a3f55df49023a"
     end
     on_intel do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.0.14/codelima_0.0.14_darwin_amd64.tar.gz"
-      sha256 "b9455a351a691aceede062bc7fc0b525954a784f8941a36ace48eace522e5567"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.0.15/codelima_0.0.15_darwin_amd64.tar.gz"
+      sha256 "688cf4ab1a8459c7371232849cf9d1bb5bc3ac019b94c9168270a1b680da0dae"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.0.14/codelima_0.0.14_linux_arm64.tar.gz"
-      sha256 "628e895743c5ec8d7126b17d00c6b5276717f7df743460acf3ee549274108a09"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.0.15/codelima_0.0.15_linux_arm64.tar.gz"
+      sha256 "32078d442db60b3ac0e8d2ec7a424dfca42714928ca248c24fc1069965712d55"
     end
     on_intel do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.0.14/codelima_0.0.14_linux_amd64.tar.gz"
-      sha256 "d51e9d60995a3f5a6ab273f7127baefa52c3d7dafaf79f85ba00222436602a0f"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.0.15/codelima_0.0.15_linux_amd64.tar.gz"
+      sha256 "4c270c9e0540ff4558fff59222b169283bc12aa40f5ba09c3bbaf4f625a774c0"
     end
   end
 
@@ -38,6 +38,7 @@ class Codelima < Formula
     ghostty_lib = OS.mac? ? "libghostty-vt.dylib" : "libghostty-vt.so"
     source_ghostty_lib = File.join(root, "lib", ghostty_lib)
     (libexec/"bin").install "#{root}/bin/codelima-real"
+    chmod 0755, libexec/"bin/codelima-real"
     pkgshare.mkpath
     Zlib::GzipWriter.open(pkgshare/"#{ghostty_lib}.gz") do |gz|
       gz.write File.binread(source_ghostty_lib)
