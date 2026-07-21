@@ -1,31 +1,27 @@
 require "zlib"
 
 class Codelima < Formula
-  desc "Shell-first TUI and CLI for Lima-backed project nodes"
+  desc "Shell-first TUI and CLI for Lima-backed coding nodes"
   homepage "https://github.com/brianrackle/codelima"
   license "GPL-3.0-only"
 
-  version "0.0.15"
+  version "0.1.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.0.15/codelima_0.0.15_darwin_arm64.tar.gz"
-      sha256 "659908c6c9c740ffd4ae3d6eefd3caab1715da4e0d36773bf94a3f55df49023a"
-    end
-    on_intel do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.0.15/codelima_0.0.15_darwin_amd64.tar.gz"
-      sha256 "688cf4ab1a8459c7371232849cf9d1bb5bc3ac019b94c9168270a1b680da0dae"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.1.0/codelima_0.1.0_darwin_arm64.tar.gz"
+      sha256 "bbd20a0a0f6180b1255f04739760ddba061a7d1b96f007ad5061605b429f62c3"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.0.15/codelima_0.0.15_linux_arm64.tar.gz"
-      sha256 "32078d442db60b3ac0e8d2ec7a424dfca42714928ca248c24fc1069965712d55"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.1.0/codelima_0.1.0_linux_arm64.tar.gz"
+      sha256 "07d5e38aed276bbac3b31ce15cf668d9c9e257738d5502169a225b75cdcdbeb9"
     end
     on_intel do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.0.15/codelima_0.0.15_linux_amd64.tar.gz"
-      sha256 "4c270c9e0540ff4558fff59222b169283bc12aa40f5ba09c3bbaf4f625a774c0"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.1.0/codelima_0.1.0_linux_amd64.tar.gz"
+      sha256 "dc9ad23c477ae901d9d02bf9204bfbdc856732d1d8f1de6765144cf125b9e0ef"
     end
   end
 
