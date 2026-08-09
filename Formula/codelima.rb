@@ -5,23 +5,23 @@ class Codelima < Formula
   homepage "https://github.com/brianrackle/codelima"
   license "GPL-3.0-only"
 
-  version "1.2.3"
+  version "0.2.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/brianrackle/codelima/releases/download/v1.2.3/codelima_1.2.3_darwin_arm64.tar.gz"
-      sha256 "a9a880c76d77d1b96a3ed912760db9573ef9363b586e3edae2faf7f154da46f2"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.2.0/codelima_0.2.0_darwin_arm64.tar.gz"
+      sha256 "4150d5b9b47343b41cf9987fd4a276755c531a4f935e9bddcd6edc16b096d201"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/brianrackle/codelima/releases/download/v1.2.3/codelima_1.2.3_linux_arm64.tar.gz"
-      sha256 "8191c655a319e8dac0f6f1229bd2d181f1b00495542c21c765e72b5b1c40b530"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.2.0/codelima_0.2.0_linux_arm64.tar.gz"
+      sha256 "1ab70183f68edfa8fd34a73c4f9f560c895bb340a042447b4b684ec09dc70426"
     end
     on_intel do
-      url "https://github.com/brianrackle/codelima/releases/download/v1.2.3/codelima_1.2.3_linux_amd64.tar.gz"
-      sha256 "404442d63a3aa189d96883b301f5a4951bbfbfc167d45956ec9177513bba9fd1"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.2.0/codelima_0.2.0_linux_amd64.tar.gz"
+      sha256 "491d3d2573f1a922f63e004f290f88599d44d73e7404821205b7cdbda2daffa5"
     end
   end
 
