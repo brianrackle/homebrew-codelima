@@ -1,27 +1,25 @@
-require "zlib"
-
 class Codelima < Formula
   desc "Shell-first TUI and CLI for Lima-backed coding nodes"
   homepage "https://github.com/brianrackle/codelima"
   license "GPL-3.0-only"
 
-  version "0.2.3"
+  version "0.3.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.2.3/codelima_0.2.3_darwin_arm64.tar.gz"
-      sha256 "6042d3b06b660e52e93490a624822911ba0c9da1232aacd3097a32fb2ef110a6"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.3.0/codelima_0.3.0_darwin_arm64.tar.gz"
+      sha256 "b7d6b773fb9c9d2212ca8a9dc2d1dfcafcf92b94727f2478e1fb09681eb78007"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.2.3/codelima_0.2.3_linux_arm64.tar.gz"
-      sha256 "5dc20ea6dab0fc50ba76d67740015ed84ea1a59ca273f642d40b7207ecb871fc"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.3.0/codelima_0.3.0_linux_arm64.tar.gz"
+      sha256 "224f73464110bc2efc8d775a5d9666a02307bd785c063d8caf4a303ed942d230"
     end
     on_intel do
-      url "https://github.com/brianrackle/codelima/releases/download/v0.2.3/codelima_0.2.3_linux_amd64.tar.gz"
-      sha256 "2d1eca168c6de8e92035d4d9c07814fa805b730de1ef16133ebcc5782a3fcd37"
+      url "https://github.com/brianrackle/codelima/releases/download/v0.3.0/codelima_0.3.0_linux_amd64.tar.gz"
+      sha256 "1fa7a5986d0cb7532592ae869760df2487cad5e55464ff4c9a6a4a123c38a7dd"
     end
   end
 
@@ -29,34 +27,14 @@ class Codelima < Formula
   depends_on "lima"
 
   def install
-    root = Dir["codelima_*/bin/codelima-real"].empty? ? "." : Dir["codelima_*"].fetch(0)
-    odie "missing packaged release root" unless File.exist?(File.join(root, "bin", "codelima-real"))
+    root = Dir["codelima_*/bin/codelima"].empty? ? "." : Dir["codelima_*"].fetch(0)
+    odie "missing packaged release root" unless File.exist?(File.join(root, "bin", "codelima"))
     odie "missing packaged renderer worker" unless File.exist?(File.join(root, "bin", "codelima-renderer-worker"))
-    ghostty_lib = OS.mac? ? "libghostty-vt.dylib" : "libghostty-vt.so"
-    source_ghostty_lib = File.join(root, "lib", ghostty_lib)
-    (libexec/"bin").install "#{root}/bin/codelima-real"
-    chmod 0755, libexec/"bin/codelima-real"
+    (libexec/"bin").install "#{root}/bin/codelima"
+    chmod 0755, libexec/"bin/codelima"
     (libexec/"bin").install "#{root}/bin/codelima-renderer-worker"
     chmod 0755, libexec/"bin/codelima-renderer-worker"
-    pkgshare.mkpath
-    Zlib::GzipWriter.open(pkgshare/"#{ghostty_lib}.gz") do |gz|
-      gz.write File.binread(source_ghostty_lib)
-    end
-    (bin/"codelima").write <<~SH
-#!/bin/bash
-set -eu
-CACHE_ROOT="${XDG_CACHE_HOME:-$HOME/.cache}/codelima/#{version}"
-mkdir -p "$CACHE_ROOT"
-RUNTIME_LIB="$CACHE_ROOT/#{ghostty_lib}"
-if [ ! -f "$RUNTIME_LIB" ] || [ "#{pkgshare}/#{ghostty_lib}.gz" -nt "$RUNTIME_LIB" ]; then
-  gzip -dc "#{pkgshare}/#{ghostty_lib}.gz" > "$RUNTIME_LIB.tmp"
-  chmod 0755 "$RUNTIME_LIB.tmp"
-  mv "$RUNTIME_LIB.tmp" "$RUNTIME_LIB"
-fi
-export CODELIMA_GHOSTTY_VT_LIB="$RUNTIME_LIB"
-exec "#{libexec}/bin/codelima-real" "$@"
-SH
-    chmod 0755, bin/"codelima"
+    bin.install_symlink libexec/"bin/codelima"
   end
 
   test do
